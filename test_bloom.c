@@ -1,4 +1,5 @@
 #include "bloom.h"
+#include <stdio.h>
 
 int main(){
     // Initialize a Bloom filter with m = 1000, n = 100, k = 3
@@ -8,14 +9,19 @@ int main(){
         return -1;
     }
 
-    // Insert some values into the Bloom filter
-    bloom_insert(&bloom_filter, 42);
-    bloom_insert(&bloom_filter, 84);
+    // Insert values into the Bloom filter
+    for(int i = 0; i < 100; i++) {
+        bloom_insert(&bloom_filter, i);
+    }
 
-    // Query the Bloom filter for inserted values
-    bloom_query(&bloom_filter, 42); // Should return found
-    bloom_query(&bloom_filter, 84); // Should return found
-    bloom_query(&bloom_filter, 21); // Should return not found
+    // Query 100 times and solve FPR
+    int count = 0;
+    int test_nr = 1000;
+    for(int i = 100; i < 100 + test_nr; i++) {
+        if (bloom_query(&bloom_filter, i) == 1)
+            count++;
+    }
+    printf("FPR : %4f\n", (float)count / test_nr);
 
     // Clean up the Bloom filter
     bloom_destroy(&bloom_filter);

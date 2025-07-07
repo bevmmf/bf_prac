@@ -4,7 +4,10 @@ CFLAGS := -Wall -O2 -g
 LDLIBS := -lcheck -lsubunit -lpthread -lm -lrt
 
 # file list
-SRC := bloom.c test_bloom.c
+SRC := bloom.c test_bloom.c xxhash.c
+# header files
+HEADERS := bloom.h xxhash.h
+# object files
 OBJ := $(SRC:.c=.o)
 TARGET := bloom
 

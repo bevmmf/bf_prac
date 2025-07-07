@@ -1,0 +1,4 @@
+#exclude xxhash.c          linguist-vendored
+#exclude xxhash.h          linguist-vendored
+xxhash.c          linguist-vendored
+xxhash.h          linguist-vendored
